@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Dev Final Evaluation</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="loginfragment">LoginFragment</string>
+    <string name="login">Login</string>
+    <string name="homefragment">HomeFragment</string>
+    <string name="username">UserName</string>
+    <string name="password">Password</string>
+    <string name="title">Title</string>
+    <string name="photo">Photo</string>
+    <string name="details">Details</string>
+    <string name="textview">TextView</string>
+    <string name="title_of_list">Title</string>
+</resources>
