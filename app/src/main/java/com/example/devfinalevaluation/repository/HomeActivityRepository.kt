@@ -4,9 +4,10 @@ import androidx.lifecycle.MutableLiveData
 import com.example.devfinalevaluation.model.Photos
 import com.example.devfinalevaluation.retrofit.ApiInterface
 import com.example.devfinalevaluation.retrofit.RetrofitClient
+import com.example.devfinalevaluation.room.PhotoDatabase
 import kotlinx.coroutines.*
 
-class HomeActivityRepository() {
+class HomeActivityRepository( private val photoDatabase: PhotoDatabase) {
     private var photoLiveData = MutableLiveData<List<Photos>>()
     val errorMessage = MutableLiveData<String>()
     var job: Job? = null
@@ -27,6 +28,7 @@ class HomeActivityRepository() {
             withContext(Dispatchers.Main) {
                 if (res.isSuccessful) {
 
+                    photoDatabase.photoDao().insertMemes(res.body()!!)
                     photoLiveData.postValue(res.body())
 
                 }else{

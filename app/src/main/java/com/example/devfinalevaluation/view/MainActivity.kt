@@ -7,6 +7,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.devfinalevaluation.R
 import com.example.devfinalevaluation.databinding.ActivityMainBinding
+import com.example.devfinalevaluation.room.MyApplication
 
 class MainActivity : AppCompatActivity() {
     private  lateinit var navController: NavController

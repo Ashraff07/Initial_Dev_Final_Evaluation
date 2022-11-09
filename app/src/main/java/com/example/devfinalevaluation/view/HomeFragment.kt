@@ -1,5 +1,6 @@
 package com.example.devfinalevaluation.view
 
+import android.app.Application
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -15,6 +16,8 @@ import com.example.devfinalevaluation.adapter.PhotosAdapter
 import com.example.devfinalevaluation.databinding.FragmentHomeBinding
 import com.example.devfinalevaluation.model.Photos
 import com.example.devfinalevaluation.repository.HomeActivityRepository
+import com.example.devfinalevaluation.room.MyApplication
+import com.example.devfinalevaluation.room.PhotoDatabase
 import com.example.devfinalevaluation.viewmodel.HomeViewModel
 
 class HomeFragment : Fragment(){
@@ -23,7 +26,6 @@ class HomeFragment : Fragment(){
     private lateinit var viewModel: HomeViewModel
     private lateinit var photosAdapter: PhotosAdapter
     private val photoList = ArrayList<Photos>()
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -37,7 +39,10 @@ class HomeFragment : Fragment(){
         viewModel.getServicesAPICall()
 
 
-        viewModel.setHomeRepository(HomeActivityRepository())
+
+        viewModel.setHomeRepository(HomeActivityRepository(photoDatabase = PhotoDatabase.getDataBase(
+            activity?.applicationContext!!
+        )))
         viewModel.getServicesAPICall()?.observe(viewLifecycleOwner, Observer { pList ->
             photoList.addAll(pList)
             photosAdapter.setPhotoList(photoList)
