@@ -27,7 +27,7 @@ class PhotosAdapter(private val onItemClicked: (position: Int) -> Unit) :
         diffResult.dispatchUpdatesTo(this)
     }
 
-    class ViewHolder(val binding:ItemPhotosBinding) : RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder(val binding: ItemPhotosBinding) : RecyclerView.ViewHolder(binding.root) {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -48,7 +48,6 @@ class PhotosAdapter(private val onItemClicked: (position: Int) -> Unit) :
         holder.itemView.setOnClickListener {
             onItemClicked(position)
         }
-
 
 
     }

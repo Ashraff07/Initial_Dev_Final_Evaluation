@@ -12,9 +12,9 @@ import com.example.devfinalevaluation.databinding.FragmentLoginBinding
 
 class DetailedFragment : Fragment() {
 
-    private lateinit var binding : FragmentDetailedBinding
-    private  var title:Bundle?= null
-    private var id:Bundle?=null
+    private lateinit var binding: FragmentDetailedBinding
+    private var title: Bundle? = null
+    private var id: Bundle? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

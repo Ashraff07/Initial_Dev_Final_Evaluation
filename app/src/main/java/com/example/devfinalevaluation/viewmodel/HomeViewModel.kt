@@ -7,11 +7,11 @@ import com.example.devfinalevaluation.repository.HomeActivityRepository
 
 class HomeViewModel : ViewModel() {
 
-    var photoLiveData: MutableLiveData<List<Photos>>?= null
+    var photoLiveData: MutableLiveData<List<Photos>>? = null
 
-    private var homeRepository: HomeActivityRepository?= null
+    private var homeRepository: HomeActivityRepository? = null
     private val photoList = ArrayList<Photos>()
-    fun setHomeRepository(homeRepository: HomeActivityRepository){
+    fun setHomeRepository(homeRepository: HomeActivityRepository) {
         this.homeRepository = homeRepository
     }
 
@@ -19,8 +19,6 @@ class HomeViewModel : ViewModel() {
         photoLiveData = homeRepository?.getServicesAPICall()
         return photoLiveData
     }
-
-
 
 
 }

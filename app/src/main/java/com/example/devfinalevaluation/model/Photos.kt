@@ -10,8 +10,8 @@ import kotlinx.android.parcel.Parcelize
 data class Photos(
 
     @PrimaryKey
-    val id:String,
-    val title:String,
-    val url:String,
-    val thumbnailUrl:String
-):Parcelable
+    val id: String,
+    val title: String,
+    val url: String,
+    val thumbnailUrl: String
+) : Parcelable

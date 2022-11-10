@@ -4,10 +4,10 @@ import org.junit.Assert
 import org.junit.Assert.*
 import org.junit.Test
 
-class RegistrationUtilTest{
+class RegistrationUtilTest {
     @Test
-    fun `test validate input`(){
-        val result = RegistrationUtil.validate("qweqweq","87435357as")
+    fun `test validate input`() {
+        val result = RegistrationUtil.validate("qweqweq", "87435357as")
         Assert.assertTrue(result)
     }
 }

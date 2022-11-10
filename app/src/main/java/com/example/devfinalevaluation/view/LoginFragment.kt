@@ -12,7 +12,7 @@ import com.example.devfinalevaluation.databinding.FragmentLoginBinding
 
 class LoginFragment : Fragment() {
 
-    private lateinit var binding : FragmentLoginBinding
+    private lateinit var binding: FragmentLoginBinding
 
 
     override fun onCreateView(
@@ -22,9 +22,9 @@ class LoginFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentLoginBinding.inflate(layoutInflater)
 
-        binding.login.setOnClickListener{
+        binding.login.setOnClickListener {
 
-            RegistrationUtil.validate("fweifhiud","fdsfdsfa")
+            RegistrationUtil.validate("fweifhiud", "fdsfdsfa")
 
             view?.findNavController()?.navigate(R.id.homeFragment)
         }

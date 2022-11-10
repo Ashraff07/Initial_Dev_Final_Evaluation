@@ -1,9 +1,10 @@
-package com.example.devfinalevaluation.room
+package com.example.devfinalevaluation.application
 
 import android.app.Application
 import com.example.devfinalevaluation.repository.HomeActivityRepository
+import com.example.devfinalevaluation.room.PhotoDatabase
 
-class MyApplication:Application() {
+class MyApplication : Application() {
 
     lateinit var homeActivityRepository: HomeActivityRepository
 
@@ -11,6 +12,6 @@ class MyApplication:Application() {
         super.onCreate()
 
         val database = PhotoDatabase.getDataBase(applicationContext)
-        homeActivityRepository = HomeActivityRepository(database)
+        homeActivityRepository = HomeActivityRepository(database, applicationContext)
     }
 }

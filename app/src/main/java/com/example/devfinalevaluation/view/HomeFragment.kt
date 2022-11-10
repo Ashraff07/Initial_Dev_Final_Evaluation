@@ -1,11 +1,11 @@
 package com.example.devfinalevaluation.view
 
-import android.app.Application
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -16,11 +16,10 @@ import com.example.devfinalevaluation.adapter.PhotosAdapter
 import com.example.devfinalevaluation.databinding.FragmentHomeBinding
 import com.example.devfinalevaluation.model.Photos
 import com.example.devfinalevaluation.repository.HomeActivityRepository
-import com.example.devfinalevaluation.room.MyApplication
 import com.example.devfinalevaluation.room.PhotoDatabase
 import com.example.devfinalevaluation.viewmodel.HomeViewModel
 
-class HomeFragment : Fragment(){
+class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
     private lateinit var viewModel: HomeViewModel
@@ -40,12 +39,19 @@ class HomeFragment : Fragment(){
 
 
 
-        viewModel.setHomeRepository(HomeActivityRepository(photoDatabase = PhotoDatabase.getDataBase(
-            activity?.applicationContext!!
-        )))
+        viewModel.setHomeRepository(
+            HomeActivityRepository(
+                PhotoDatabase.getDataBase(
+                    activity?.applicationContext!!
+                ), requireActivity().applicationContext
+            )
+        )
         viewModel.getServicesAPICall()?.observe(viewLifecycleOwner, Observer { pList ->
             photoList.addAll(pList)
             photosAdapter.setPhotoList(photoList)
+
+            Toast.makeText(requireContext(), "size:${photoList.size}", Toast.LENGTH_LONG).show()
+
         })
 
 
@@ -53,7 +59,8 @@ class HomeFragment : Fragment(){
     }
 
     private fun prepareRecyclerView() {
-        photosAdapter = PhotosAdapter { position -> onListItemClick(position)
+        photosAdapter = PhotosAdapter { position ->
+            onListItemClick(position)
         }
         binding.rvPhotos.apply {
             layoutManager = LinearLayoutManager(activity)
@@ -68,10 +75,10 @@ class HomeFragment : Fragment(){
         val title = photoList[position].title
         val id = photoList[position].id
 
-        val bundle = bundleOf("title" to title,"id" to id)
+        val bundle = bundleOf("title" to title, "id" to id)
 
 
-        view?.findNavController()?.navigate(R.id.detailedFragment,bundle)
+        view?.findNavController()?.navigate(R.id.detailedFragment, bundle)
     }
 
 

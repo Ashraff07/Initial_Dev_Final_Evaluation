@@ -3,10 +3,11 @@ package com.example.devfinalevaluation.diffutil
 import androidx.recyclerview.widget.DiffUtil
 import com.example.devfinalevaluation.model.Photos
 
-class MyDiffUtil(private val oldList: List<Photos>,private val newList: List<Photos>): DiffUtil.Callback(
+class MyDiffUtil(private val oldList: List<Photos>, private val newList: List<Photos>) :
+    DiffUtil.Callback(
 
 
-) {
+    ) {
     /**
      * Returns the size of the old list.
      *
@@ -28,14 +29,14 @@ class MyDiffUtil(private val oldList: List<Photos>,private val newList: List<Pho
 
 
     override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-        return when{
-            oldList[oldItemPosition].id != newList[newItemPosition].id ->{
+        return when {
+            oldList[oldItemPosition].id != newList[newItemPosition].id -> {
                 false
             }
-            oldList[oldItemPosition].title != newList[newItemPosition].title ->{
+            oldList[oldItemPosition].title != newList[newItemPosition].title -> {
                 false
             }
-            else ->true
+            else -> true
 
         }
 
