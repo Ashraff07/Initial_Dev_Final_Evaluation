@@ -50,8 +50,6 @@ class HomeFragment : Fragment() {
             photoList.addAll(pList)
             photosAdapter.setPhotoList(photoList)
 
-            Toast.makeText(requireContext(), "size:${photoList.size}", Toast.LENGTH_LONG).show()
-
         })
 
 

@@ -16,6 +16,7 @@ class HomeActivityRepository(
     private var photoLiveData = MutableLiveData<List<Photos>>()
     val errorMessage = MutableLiveData<String>()
     var job: Job? = null
+    var job2: Job? = null
 
     val exceptionHandler = CoroutineExceptionHandler { _,
                                                        throwable ->
@@ -24,15 +25,16 @@ class HomeActivityRepository(
 
 
     fun getServicesAPICall(): MutableLiveData<List<Photos>> {
-        job = CoroutineScope(
-            Dispatchers.IO +
-                    exceptionHandler
-        ).launch {
-            val response = RetrofitClient.getInstance().create(ApiInterface::class.java)
-            val res = response.getServicesAPICall()
-            withContext(Dispatchers.Main) {
+        if (NetworkUtils.isInternetAvailable(applicationContext)) {
+            job = CoroutineScope(
+                Dispatchers.IO +
+                        exceptionHandler
+            ).launch {
+                val response = RetrofitClient.getInstance().create(ApiInterface::class.java)
+                val res = response.getServicesAPICall()
+                withContext(Dispatchers.Main) {
 
-                if (NetworkUtils.isInternetAvailable(applicationContext)) {
+
                     if (res.isSuccessful) {
 
                         photoDatabase.photoDao().insertMemes(res.body()!!)
@@ -41,11 +43,19 @@ class HomeActivityRepository(
                     } else {
                         onError("Error : ${res.message()}")
                     }
-                } else {
-                    val photos = photoDatabase.photoDao().getPhotos()
-                    photoLiveData.postValue(photos)
+
                 }
             }
+
+        } else {
+            job2 = CoroutineScope(Dispatchers.IO).launch {
+                withContext(Dispatchers.IO) {
+                    val photos = photoDatabase.photoDao().getPhotos()
+                    photoLiveData.postValue(photos)
+
+                }
+            }
+
 
         }
         return photoLiveData
